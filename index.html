@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Program Activity 2 (INFO)</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Poppins', sans-serif;
+            background:
+				linear-gradient(135deg,#0000 18.75%,#d3d5d4 0 31.25%,#0000 0),
+				repeating-linear-gradient(45deg,#d3d5d4 -6.25% 6.25%,#218547 0 18.75%);
+            backdrop-filter: blur(4px);
+			background-size: 110px 110px;
+            /* animation: bgMove 2s linear infinite; */
+            /* transform: translate3d(0, 0, 0); */
+			/* 32b665 */
+			/* 4E4187 */
+		}
+
+        /* @keyframes bgMove {
+            from {background-position: 0 0;}
+            to {background-position: 110px 110px;}
+        } */
+
+		section{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			min-height: 100vh;
+			width: 100%;
+		}
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			height: 800px;
+			width: 600px;
+			padding: 20px;
+			background-color: #ffffff;
+			border-radius: 20px;
+			border: 5px solid #000000;
+			
+		} 
+
+		h1 {
+			padding: 30px;
+			font-size: 3em;
+			color: #000000;
+			text-align: center;
+		}
+
+		.form-container{
+			text-align: left;
+			padding: 20px;
+			margin: 20px;
+			border-radius: 20px;
+			background-color: #218547;
+			/* 218547 */
+			border: 5px solid #000000;
+			box-shadow: 10px 10px 0px #000000;
+		}
+
+		.input-box{
+			width: 450px;
+			margin: 10px 0;
+		}
+
+		.input-box label {
+			font-size: 1.25em;
+			color: #ffffff;
+			pointer-events: none;
+		}
+
+		.input-box input {
+			margin: 5px 0;
+			padding: 10px;
+			width: 100%;
+			font-size: 1em;
+			outline: none;
+			border-radius: 7px;
+			border: 3px solid #000000;
+			background-color: #ffffff;
+			color: #000000;
+		}
+
+		button {
+			width: 100%;
+			padding: 20px;
+			margin: 30px 0 0;
+			border: 3px solid #000000;
+			border-radius: 50px;
+			background-color: #ffffff;
+			color: rgb(0, 0, 0);
+			font-size: 1.25em;
+			font-weight: 800;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: #000000;
+			color: #ffffff;
+		}
+
+		input:focus::placeholder {
+        	color: transparent;
+      	}
+
+		/* @media (max-width: 650px) {
+			.container {
+				width: 100%;
+				height: 100vh;
+				background: transparent;
+				backdrop-filter: blur(10px);
+				border-radius: 0;
+			}
+
+			h1{
+				font-size: 4em;
+				color: #ffffff;
+				-webkit-text-stroke-width: 2px;
+           		-webkit-text-stroke-color: black;
+				text-shadow: 3px 3px 0px #000000;
+			}
+		} */
+	</style>
+	<script>
+        function generateOTP() {
+            var digits = '0123456789';
+            var otpLength = 6;
+            var otp = '';
+
+            for (var i = 0; i < otpLength; i++) {
+                otp += digits[Math.floor(Math.random() * 10)];
+            }
+
+            document.getElementById("otp").placeholder = otp;
+        }
+
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var enteredOTP = document.getElementById("otp").value;
+            var generatedOTP = document.getElementById("otp").placeholder;
+
+            if (username === "sample" && password === "123" && enteredOTP === generatedOTP) {
+                alert("Login Successful!");
+            } else {
+                alert("Invalid username, password, and/or OTP.");
+            }
+        }
+	</script>
+</head>
+<body onload="generateOTP();">
+	<section>
+		<div class="container">
+			<h1>One Time Login</h1>
+			<div class="form-container">
+				<form onsubmit="validateForm(); return false;">
+					<div class="input-box">
+						<label for="username">Username</label>
+						<input placeholder="sample" type="text" id="username" name="username" required>
+					</div>
+					<div class="input-box">
+						<label for="password">Password</label>
+						<input placeholder="123" type="password" id="password" name="password" required>
+					</div>
+                    <div class="input-box">
+                        <label for="otp">OTP</label>
+                        <input type="text" id="otp" name="otp" required>
+                        <button class="resend" type="button" onclick="generateOTP();">GENERATE OTP</button>
+					</div>
+					<button type="submit" onclick="validateForm()">LOGIN</button>
+				</form>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
